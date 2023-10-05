@@ -20,10 +20,18 @@ int main() {
     int MenuPrincipal;
     scanf("%d", &MenuPrincipal);
 
-    //Menu de opções do Menu Principal
+     //Menu de opções do Menu Principal
     if (MenuPrincipal == 1) //Consulta de livros
     {
+        int opcaoConsultar;
         printf("Você escolheu: 1 - Consultar livros. \n");
+        printf("Digite o número da opção desejada: \n");
+        printf("1 - Pesquisar livro por título \n");
+        printf("2 - Pesquisar livro por autor \n");
+        printf("3 - Pesquisar livro por gênero \n");
+        printf("4 - Pesquisar livro por ISBN \n");
+        printf("5 - Voltar ao menu principal \n");
+        scanf("%d", &opcaoConsultar);
     }
     else if (MenuPrincipal == 2) //Cadastro de livros
     {
