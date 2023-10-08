@@ -131,7 +131,7 @@ do{
 
     }
 }    else if (MenuPrincipal == 2) //Cadastro de livros
-    {
+    {do{
         printf("Você escolheu: 2 - Cadastrar livros. \n");
         printf("Para cadastro de livros precisaremos de algumas informações, como titulo, autor, gênero e ISBN. \n");
             printf("Digite o nome do livro que deseja cadastrar: \n");
@@ -147,15 +147,9 @@ do{
             printf("Deseja cadastrar outro livro? \n");
             printf("1 - Sim \n");
             printf("2 - Não. Voltar ao menu principal \n");
-            scanf("%d", &opcaoCadastrar);
-            while (opcaoCadastrar == 1)
-            {
-               return opcaoCadastrar;
-            }
-            while (opcaoCadastrar == 2)
-            {
-                return MenuPrincipal;
-            }
+            scanf("%d", &opcao);}
+            while(opcao==1);
+
 
     }
     else if (MenuPrincipal == 3)//Empréstimo de livros
