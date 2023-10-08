@@ -9,12 +9,16 @@ typedef struct listaLivros
         char genero[100];
         char ISBN[100];
         int anoPublicacao, codigo;
+
+
     };
     struct listaLivros livros[150]; // Criando um vetor de livros com capacidade para 150 livros
 
 
 
 int main() {
+     int opcao=1;
+    do{
 setlocale(LC_ALL, "Portuguese");//acentos funcionando
     //Menu principal
     printf("|-----------------------------------------------|\n");
@@ -58,24 +62,20 @@ setlocale(LC_ALL, "Portuguese");//acentos funcionando
         {
 
           case 1:
+              do{
             printf("Digite o título do livro que deseja consultar: \n");
             scanf("%s", livros[numLivrosCadastrados].titulo);
             printf("O livro está disponível para empréstimo. \n");
             printf("Deseja consultar outro livro? \n");
             printf("1 - Sim \n");
             printf("2 - Não. Voltar ao menu principal \n");
-            scanf("%d", &opcaoConsultar);
-            while (opcaoConsultar == 1)
-            {
-               return opcaoConsultar;
-            }
-            while (opcaoConsultar == 2)
-            {
-                return &MenuPrincipal;
-            }
+            scanf("%d", &opcao);}
+            while(opcao==1);
+            break;
+
 
         case 2:
-
+            do{
             printf("Digite o nome do autor do livro que deseja consultar: \n");
             scanf("%s", livros[numLivrosCadastrados].autor);
             //logica para ser implementada
@@ -95,56 +95,40 @@ setlocale(LC_ALL, "Portuguese");//acentos funcionando
             printf("Deseja consultar outro livro? \n");
             printf("1 - Sim \n");
             printf("2 - Não. Voltar ao menu principal \n");
-            scanf("%d", &opcaoConsultar);
-            while (opcaoConsultar == 1)
-            {
-               return opcaoConsultar;
-            }
-            while (opcaoConsultar == 2)
-            {
-                return &MenuPrincipal;
-            }
+            scanf("%d", &opcao);}
+            while(opcao==1);
+            break;
 
         case 3:
-
+do{
             printf("Digite o gênero do livro que deseja consultar: \n");
             scanf("%s", livros[numLivrosCadastrados].genero);
             printf("O livro está disponível para empréstimo. \n");
             printf("Deseja consultar outro livro? \n");
             printf("1 - Sim \n");
             printf("2 - Não. Voltar ao menu principal \n");
-            scanf("%d", &opcaoConsultar);
-            while (opcaoConsultar == 1)
-            {
-               return opcaoConsultar;
-            }
-            while (opcaoConsultar == 2)
-            {
-                return &MenuPrincipal;
-            }
+            scanf("%d", &opcao);}
+            while(opcao==1);
+            break;
 
         case 4:
-        {
+do{
             printf("Digite o código ISBN do livro que deseja consultar: \n");
             scanf("%s", livros[numLivrosCadastrados].ISBN);
             printf("O livro está disponível para empréstimo. \n");
             printf("Deseja consultar outro livro? \n");
             printf("1 - Sim \n");
             printf("2 - Não. Voltar ao menu principal \n");
-            scanf("%d", &opcaoConsultar);
-            while (opcaoConsultar == 1)
-            {
-               return opcaoConsultar;
-            }
-            while (opcaoConsultar == 2)
-            {
-                return &MenuPrincipal;
-            }
-        }
-        for (int i = 4; i < opcaoConsultar; i++)
-        {
-            return &MenuPrincipal;
-        }
+            scanf("%d", &opcao);}
+            while(opcao==1);
+            break;
+
+             case 5:
+            opcao=2;
+
+            break;
+
+
     }
 }    else if (MenuPrincipal == 2) //Cadastro de livros
     {
@@ -193,6 +177,7 @@ setlocale(LC_ALL, "Portuguese");//acentos funcionando
     else if (MenuPrincipal == 5)//Sair do programa
     {
         printf("Você escolheu: 5 - Sair. \n");
+        opcao=1;
 
     }
     else
@@ -200,4 +185,4 @@ setlocale(LC_ALL, "Portuguese");//acentos funcionando
         printf("Opção inválida. \n");
     }
 
-}
+}while(opcao != 1);}
