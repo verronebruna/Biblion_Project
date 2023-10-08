@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include<locale.h>
 typedef struct listaLivros
     {
         char titulo[100];
@@ -15,10 +15,11 @@ typedef struct listaLivros
 
 
 int main() {
+setlocale(LC_ALL, "Portuguese");//acentos funcionando
     //Menu principal
     printf("|-----------------------------------------------|\n");
     printf("|          Bem-vindo ao Projeto Biblion.        |\n");
-    printf("| Aqui você pode pesquisar livros na biblioteca |\n"); 
+    printf("| Aqui você pode pesquisar livros na biblioteca |\n");
     printf("| e consultar se o livro está disponível ou não.|\n");
     printf("|-----------------------------------------------|\n");
     printf("|        Escolha uma das opções abaixo:         |\n");
@@ -39,7 +40,7 @@ int main() {
 
     //Relatórios de livros
     int opcaoRelatorios;
-    
+
      //Menu de opções do Menu Principal
     if (MenuPrincipal == 1) //Consulta de livros
     {
@@ -53,8 +54,10 @@ int main() {
         printf("5 - Voltar ao menu principal \n");
         scanf("%d", &opcaoConsultar);
 
-        for (int i = 0; i < opcaoConsultar; i++) 
+        switch(opcaoConsultar)
         {
+
+          case 1:
             printf("Digite o título do livro que deseja consultar: \n");
             scanf("%s", livros[numLivrosCadastrados].titulo);
             printf("O livro está disponível para empréstimo. \n");
@@ -67,12 +70,12 @@ int main() {
                return opcaoConsultar;
             }
             while (opcaoConsultar == 2)
-            { 
+            {
                 return &MenuPrincipal;
-            }     
-        }
-        for (int i = 1; i < opcaoConsultar; i++) 
-        {
+            }
+
+        case 2:
+
             printf("Digite o nome do autor do livro que deseja consultar: \n");
             scanf("%s", livros[numLivrosCadastrados].autor);
             //logica para ser implementada
@@ -98,12 +101,12 @@ int main() {
                return opcaoConsultar;
             }
             while (opcaoConsultar == 2)
-            { 
+            {
                 return &MenuPrincipal;
-            }     
-        }
-        for (int i = 2; i < opcaoConsultar; i++) 
-        {
+            }
+
+        case 3:
+
             printf("Digite o gênero do livro que deseja consultar: \n");
             scanf("%s", livros[numLivrosCadastrados].genero);
             printf("O livro está disponível para empréstimo. \n");
@@ -116,11 +119,11 @@ int main() {
                return opcaoConsultar;
             }
             while (opcaoConsultar == 2)
-            { 
+            {
                 return &MenuPrincipal;
-            }     
-        }
-        for (int i = 3; i < opcaoConsultar; i++) 
+            }
+
+        case 4:
         {
             printf("Digite o código ISBN do livro que deseja consultar: \n");
             scanf("%s", livros[numLivrosCadastrados].ISBN);
@@ -134,16 +137,16 @@ int main() {
                return opcaoConsultar;
             }
             while (opcaoConsultar == 2)
-            { 
+            {
                 return &MenuPrincipal;
-            }     
+            }
         }
-        for (int i = 4; i < opcaoConsultar; i++) 
+        for (int i = 4; i < opcaoConsultar; i++)
         {
             return &MenuPrincipal;
         }
     }
-    else if (MenuPrincipal == 2) //Cadastro de livros
+}    else if (MenuPrincipal == 2) //Cadastro de livros
     {
         printf("Você escolheu: 2 - Cadastrar livros. \n");
         printf("Para cadastro de livros precisaremos de algumas informações, como titulo, autor, gênero e ISBN. \n");
@@ -155,7 +158,7 @@ int main() {
             scanf("%s", livros[numLivrosCadastrados].genero);
             printf("Digite o ISBN do livro que deseja cadastrar: \n");
             scanf("%s", livros[numLivrosCadastrados].ISBN);
-            numLivrosCadastrados++; 
+            numLivrosCadastrados++;
             printf("Livro cadastrado com sucesso! \n");
             printf("Deseja cadastrar outro livro? \n");
             printf("1 - Sim \n");
@@ -166,10 +169,10 @@ int main() {
                return opcaoCadastrar;
             }
             while (opcaoCadastrar == 2)
-            { 
+            {
                 return MenuPrincipal;
-            }     
-            
+            }
+
     }
     else if (MenuPrincipal == 3)//Empréstimo de livros
     {
@@ -196,5 +199,5 @@ int main() {
     {
         printf("Opção inválida. \n");
     }
-       
+
 }
