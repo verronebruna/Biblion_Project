@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include<locale.h>
-typedef struct listaLivros
+typedef struct lista_livros
     {
         char titulo[100];
         char autor[100];
@@ -12,7 +12,7 @@ typedef struct listaLivros
 
 
     };
-    struct listaLivros livros[150]; // Criando um vetor de livros com capacidade para 150 livros
+    struct lista_livros livros[150]; // Criando um vetor de livros com capacidade para 150 livros
 
 
 
