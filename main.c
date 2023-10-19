@@ -11,13 +11,15 @@ typedef struct listaLivros
         int anoPublicacao, codigo;
 
 
-    };
-    struct listaLivros livros[150]; // Criando um vetor de livros com capacidade para 150 livros
+    } livro; // Criando um vetor de livros com capacidade para 150 livros
 
 
 
 int main() {
+     livro livros[150];
      int opcao=1;
+     int encontrado=0;
+     char isbnfornecido[150];
     do{
 setlocale(LC_ALL, "Portuguese");//acentos funcionando
     //Menu principal
@@ -64,7 +66,6 @@ setlocale(LC_ALL, "Portuguese");//acentos funcionando
           case 1:
               do{
             printf("Digite o título do livro que deseja consultar: \n");
-            scanf("%s", livros[numLivrosCadastrados].titulo);
             printf("O livro está disponível para empréstimo. \n");
             printf("Deseja consultar outro livro? \n");
             printf("1 - Sim \n");
@@ -77,7 +78,7 @@ setlocale(LC_ALL, "Portuguese");//acentos funcionando
         case 2:
             do{
             printf("Digite o nome do autor do livro que deseja consultar: \n");
-            scanf("%s", livros[numLivrosCadastrados].autor);
+
             //logica para ser implementada
             // if(livros nao existe?)
             // {
@@ -102,7 +103,7 @@ setlocale(LC_ALL, "Portuguese");//acentos funcionando
         case 3:
 do{
             printf("Digite o gênero do livro que deseja consultar: \n");
-            scanf("%s", livros[numLivrosCadastrados].genero);
+
             printf("O livro está disponível para empréstimo. \n");
             printf("Deseja consultar outro livro? \n");
             printf("1 - Sim \n");
@@ -114,7 +115,7 @@ do{
         case 4:
 do{
             printf("Digite o código ISBN do livro que deseja consultar: \n");
-            scanf("%s", livros[numLivrosCadastrados].ISBN);
+
             printf("O livro está disponível para empréstimo. \n");
             printf("Deseja consultar outro livro? \n");
             printf("1 - Sim \n");
@@ -135,13 +136,12 @@ do{
         printf("Você escolheu: 2 - Cadastrar livros. \n");
         printf("Para cadastro de livros precisaremos de algumas informações, como titulo, autor, gênero e ISBN. \n");
             printf("Digite o nome do livro que deseja cadastrar: \n");
-            scanf("%s", livros[numLivrosCadastrados].titulo);
             printf("Digite o nome do autor do livro que deseja cadastrar: \n");
-            scanf("%s", livros[numLivrosCadastrados].autor);
+
             printf("Digite o gênero do livro que deseja cadastrar: \n");
-            scanf("%s", livros[numLivrosCadastrados].genero);
+
             printf("Digite o ISBN do livro que deseja cadastrar: \n");
-            scanf("%s", livros[numLivrosCadastrados].ISBN);
+
             numLivrosCadastrados++;
             printf("Livro cadastrado com sucesso! \n");
             printf("Deseja cadastrar outro livro? \n");
@@ -152,12 +152,46 @@ do{
 
 
     }
-    else if (MenuPrincipal == 3)//Empréstimo de livros
-    {
-        //fluxo de empréstimo de livros para ser implementado
-        printf("Você escolheu: 3 - Empréstimo de livros. \n");
-   }
-   else if (MenuPrincipal == 4)//Relatórios de livros
+    else if (MenuPrincipal == 3){//Empréstimo de livros
+        opcao=1;
+while(opcao==1){
+char email;
+
+    printf("Digite o código ISBN do livro que deseja emprestar: ");
+
+    scanf(" %s", &isbnfornecido);
+    strcpy(livros[9].ISBN,"teste");
+
+            encontrado = 0; // Reinicialize a variável encontrado
+
+            for (int i = 0; i < 150; i++) { // Itere sobre os livros
+                if (strcmp(livros[i].ISBN, isbnfornecido)==0) {
+                    encontrado = 1;
+                    break;
+                }
+            }
+            if (encontrado == 1) {
+                printf("O livro está disponível para empréstimo!\nPor favor digite seu email para completar o empréstimo \n");
+                scanf(" %s",&email);
+                printf("O livro foi emprestado com sucesso\ndeseja emprestar outro livro?\n");
+                printf("1 - Sim \n");
+                printf("2 - Não. Voltar ao menu principal \n");
+                scanf(" %d", &opcao);}
+
+             else {
+                printf("O livro não está disponível para empréstimo.\n");
+                printf("Deseja tentar outro código?\n");
+                printf("1 - Sim \n");
+                printf("2 - Não. Voltar ao menu principal \n");
+                scanf(" %d", &opcao);}}
+
+
+
+
+
+
+
+}   else if (MenuPrincipal == 4)//Relatórios de livros
     {
         //fluxo de relatórios de livros para ser implementado
         printf("Você escolheu: 4 - Relatórios de livros \n");
