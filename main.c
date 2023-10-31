@@ -160,23 +160,23 @@ else if (MenuPrincipal == 3) { // Empréstimo de livros
 
         printf("Digite o código ISBN do livro que deseja emprestar: ");
         scanf(" %s", &isbnfornecido);
-         strcpy(livros[9].ISBN,"teste");
-
+strcpy(livros[9].ISBN,"teste");
         encontrado = 0;
 
-        for (int i = 0; i < 150; i++) {
+        for (int i = 0; i < 150; i++) { // esse 'for' vai checar o ISBN fornecido com os ISBNs registrados.
             if (strcmp(livros[i].ISBN, isbnfornecido) == 0) {
                 encontrado = 1;
 
-                if (livros[i].emprestado == 0) {
+
+                if (livros[i].emprestado == 0) {//as variaveis começam com o valor 0, então vai entrar nesse if se o livro não tiver sido emprestado antes
                     printf("O livro está disponível para empréstimo!\nPor favor digite seu email para completar o empréstimo: ");
                     scanf(" %s", &email);
-                    livros[i].emprestado = 1; // Mark the book as borrowed
+                    livros[i].emprestado = 1; // o livro foi marcado como emprestado
                     printf("O livro foi emprestado com sucesso.\n");
                 } else {
                     printf("O livro não está disponível para empréstimo.\n");
                 }
-                break;
+                break; //isso quebra o for.
             }
         }
 
@@ -187,7 +187,11 @@ else if (MenuPrincipal == 3) { // Empréstimo de livros
         printf("Deseja emprestar outro livro?\n");
         printf("1 - Sim\n");
         printf("2 - Não. Voltar ao menu principal\n");
-        scanf("%d", &opcao); // Allow the user to continue or return to the main menu
+        scanf("%d", &opcao);
+        if(opcao != 1 && opcao !=2){
+            printf("Opção inválida, retornando ao menu principal\n");
+            opcao=2;
+        }
     }
 }
 
@@ -214,4 +218,4 @@ else if (MenuPrincipal == 3) { // Empréstimo de livros
         printf("Opção inválida. \n");
     }
 
-}while(opcao != 1);}
+}while(opcao == 2);}
