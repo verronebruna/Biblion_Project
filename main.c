@@ -9,6 +9,7 @@ typedef struct listaLivros
         char genero[100];
         char ISBN[100];
         int anoPublicacao, codigo;
+        int emprestado;
 
 
     } livro; // Criando um vetor de livros com capacidade para 150 livros
@@ -152,46 +153,46 @@ do{
 
 
     }
-    else if (MenuPrincipal == 3){//Empréstimo de livros
-        opcao=1;
-while(opcao==1){
-char email;
+else if (MenuPrincipal == 3) { // Empréstimo de livros
+    opcao = 1;
+    while (opcao == 1) {
+        char email;
 
-    printf("Digite o código ISBN do livro que deseja emprestar: ");
+        printf("Digite o código ISBN do livro que deseja emprestar: ");
+        scanf(" %s", &isbnfornecido);
+         strcpy(livros[9].ISBN,"teste");
 
-    scanf(" %s", &isbnfornecido);
-    strcpy(livros[9].ISBN,"teste");
+        encontrado = 0;
 
-            encontrado = 0; // Reinicialize a variável encontrado
+        for (int i = 0; i < 150; i++) {
+            if (strcmp(livros[i].ISBN, isbnfornecido) == 0) {
+                encontrado = 1;
 
-            for (int i = 0; i < 150; i++) { // Itere sobre os livros
-                if (strcmp(livros[i].ISBN, isbnfornecido)==0) {
-                    encontrado = 1;
-                    break;
+                if (livros[i].emprestado == 0) {
+                    printf("O livro está disponível para empréstimo!\nPor favor digite seu email para completar o empréstimo: ");
+                    scanf(" %s", &email);
+                    livros[i].emprestado = 1; // Mark the book as borrowed
+                    printf("O livro foi emprestado com sucesso.\n");
+                } else {
+                    printf("O livro não está disponível para empréstimo.\n");
                 }
+                break;
             }
-            if (encontrado == 1) {
-                printf("O livro está disponível para empréstimo!\nPor favor digite seu email para completar o empréstimo \n");
-                scanf(" %s",&email);
-                printf("O livro foi emprestado com sucesso\ndeseja emprestar outro livro?\n");
-                printf("1 - Sim \n");
-                printf("2 - Não. Voltar ao menu principal \n");
-                scanf(" %d", &opcao);}
+        }
 
-             else {
-                printf("O livro não está disponível para empréstimo.\n");
-                printf("Deseja tentar outro código?\n");
-                printf("1 - Sim \n");
-                printf("2 - Não. Voltar ao menu principal \n");
-                scanf(" %d", &opcao);}}
+        if (encontrado == 0) {
+            printf("Livro não encontrado.\n");
+        }
+
+        printf("Deseja emprestar outro livro?\n");
+        printf("1 - Sim\n");
+        printf("2 - Não. Voltar ao menu principal\n");
+        scanf("%d", &opcao); // Allow the user to continue or return to the main menu
+    }
+}
 
 
-
-
-
-
-
-}   else if (MenuPrincipal == 4)//Relatórios de livros
+ else if (MenuPrincipal == 4)//Relatórios de livros
     {
         //fluxo de relatórios de livros para ser implementado
         printf("Você escolheu: 4 - Relatórios de livros \n");
