@@ -187,11 +187,14 @@ strcpy(livros[9].ISBN,"teste");
         printf("Deseja emprestar outro livro?\n");
         printf("1 - Sim\n");
         printf("2 - Não. Voltar ao menu principal\n");
-        scanf("%d", &opcao);
-        if(opcao != 1 && opcao !=2){
-            printf("Opção inválida, retornando ao menu principal\n");
-            opcao=2;
-        }
+        scanf(" %d", &opcao);
+    while(opcao != 1 && opcao !=2){
+        printf("Valor inválido\n");
+        printf("Deseja emprestar outro livro?\n");
+        printf("1 - Sim\n");
+        printf("2 - Não. Voltar ao menu principal\n");
+        scanf(" %d", &opcao);
+    }
     }
 }
 
