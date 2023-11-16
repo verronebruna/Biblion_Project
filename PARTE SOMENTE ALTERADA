@@ -1,0 +1,50 @@
+
+           printf("Você escolheu: 2 - Cadastrar livros. \n");
+         do
+         {    
+                printf("Para cadastro de livros precisaremos de algumas informações, como titulo, autor, gênero e ISBN. \n");
+            
+                printf("Digite o nome do livro que deseja cadastrar: \n");
+                limparBufferEntrada();  // Limpar o buffer de entrada
+                fgets(livros[numLivrosCadastrados].titulo, sizeof(livros[numLivrosCadastrados].titulo), stdin);
+                livros[numLivrosCadastrados].titulo[strcspn(livros[numLivrosCadastrados].titulo, "\n")] = 0;  // Remover a quebra de linha
+
+                printf("Digite o nome do autor do livro que deseja cadastrar: \n");
+                fflush(stdin);
+                fgets(livros[numLivrosCadastrados].autor, sizeof(livros[numLivrosCadastrados].autor), stdin);
+                livros[numLivrosCadastrados].autor[strcspn(livros[numLivrosCadastrados].autor, "\n")] = 0;
+
+                printf("Digite o ISBN do livro que deseja cadastrar: \n");
+                fflush(stdin);
+                fgets(livros[numLivrosCadastrados].ISBN, sizeof(livros[numLivrosCadastrados].ISBN), stdin);
+                livros[numLivrosCadastrados].ISBN[strcspn(livros[numLivrosCadastrados].ISBN, "\n")] = 0;
+
+                // Inicializando o campo disponível
+                livros[numLivrosCadastrados].disponivel = 1;
+
+
+                numLivrosCadastrados++;
+            
+                if(numLivrosCadastrados >= 150)
+                {    
+                    printf("Limite maximo de cadastros atingido. Nao e possivel cadastrar mais livros.\n");
+                }
+           
+                printf("Livro cadastrado com sucesso! \n");
+                printf("Deseja cadastrar outro livro? \n");
+                printf("1 - Sim \n");
+                printf("2 - Não. Voltar ao menu principal \n");
+                scanf("%d", &opcaoMenuPrincipal);
+                
+                while (opcaoMenuPrincipal != 1 && opcaoMenuPrincipal != 2)
+                {
+                    printf("Opção inválida. Digite 1 para cadastrar outro livro ou 2 para voltar ao menu principal.\n");
+                    scanf("%d", &opcaoMenuPrincipal);
+                }
+
+         } while (opcaoMenuPrincipal == 1);
+
+         break;
+
+        case 3:
+                
