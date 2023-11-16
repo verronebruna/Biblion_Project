@@ -3,6 +3,9 @@
 #include <string.h>
 #include <locale.h>
 #include <time.h>
+
+#define MAX_LIVROS 150
+
 typedef struct lista_livros
 {
     char titulo[100];
@@ -56,6 +59,7 @@ void MenuPrincipal()
     printf("|           5 - Sair                            |\n");
     printf("|-----------------------------------------------|\n");
 }
+
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
@@ -72,6 +76,7 @@ int main()
     int numLivrosEmprestados = 0;
     int numLivrosAtrasados = 0;
     int prazoAtraso = 7;
+    char email[150];
 
     do
     {
@@ -187,6 +192,7 @@ int main()
             printf("|-----------------------------------------------|\n");
             printf("|     Você escolheu: 2 - Cadastrar livros.      |\n");
             printf("|-----------------------------------------------|\n");
+
             do
             {
                 printf("|-----------------------------------------------|\n");
@@ -198,12 +204,14 @@ int main()
                 limparBufferEntrada();
                 fgets(livros[numLivrosCadastrados].titulo, sizeof(livros[numLivrosCadastrados].titulo), stdin);
                 livros[numLivrosCadastrados].titulo[strcspn(livros[numLivrosCadastrados].titulo, "\n")] = 0;
+
                 printf("|-----------------------------------------------|\n");
                 printf("|        Digite o nome do autor do livro:       |\n");
                 printf("|-----------------------------------------------|\n");
                 fflush(stdin);
                 fgets(livros[numLivrosCadastrados].autor, sizeof(livros[numLivrosCadastrados].autor), stdin);
                 livros[numLivrosCadastrados].autor[strcspn(livros[numLivrosCadastrados].autor, "\n")] = 0;
+
                 printf("|-----------------------------------------------|\n");
                 printf("|  Digite o ISBN do livro que deseja cadastrar: |\n");
                 printf("|-----------------------------------------------|\n");
@@ -211,8 +219,7 @@ int main()
                 fgets(livros[numLivrosCadastrados].ISBN, sizeof(livros[numLivrosCadastrados].ISBN), stdin);
                 livros[numLivrosCadastrados].ISBN[strcspn(livros[numLivrosCadastrados].ISBN, "\n")] = 0;
 
-                livros[numLivrosCadastrados].disponivel = 1; // não deveria começar com 0?
-                livros[numLivrosCadastrados].emprestado = 0; // Perguntar para o Bruno se é necessário inicializar o campo emprestado.
+                livros[numLivrosCadastrados].disponivel = 1;
 
                 numLivrosCadastrados++;
 
@@ -248,68 +255,71 @@ int main()
 
         case 3:
 
-            opcaoEmprestimo = 1;
-            while (opcaoEmprestimo == 1)
+            printf("|-----------------------------------------------|\n");
+            printf("|  Digite o ISBN do livro que deseja emprestar: |\n");
+            printf("|-----------------------------------------------|\n");
+            scanf("%s", isbnfornecido);
+            encontrado = 0;
+
+            for (int i = 0; i < numLivrosCadastrados; i++)
             {
-                char email[100];
-                printf("|-----------------------------------------------|\n");
-                printf("|  Digite o ISBN do livro que deseja emprestar: |\n");
-                printf("|-----------------------------------------------|\n");
-                scanf(" %s", &isbnfornecido);
-                strcpy(livros[9].ISBN, "teste");
-                encontrado = 0;
-
-                for (int i = 0; i < 150; i++)
+                if (strcmp(livros[i].ISBN, isbnfornecido) == 0)
                 {
-                    if (strcmp(livros[i].ISBN, isbnfornecido) == 0)
+                    encontrado = 1;
+
+                    if (livros[i].emprestado == 0)
                     {
-                        encontrado = 1;
-
-                        if (livros[i].emprestado == 0)
-                        {
-                            printf("|-----------------------------------------------|\n");
-                            printf("|   O livro está disponível para empréstimo!    |\n");
-                            printf("| Digite seu email para completar o empréstimo: |\n");
-                            printf("|-----------------------------------------------|\n");
-                            scanf(" %s", email);
-                            livros[i].emprestado = 1;
-                            printf("|-----------------------------------------------|\n");
-                            printf("|       O livro foi emprestado com sucesso.     |\n");
-                            printf("|-----------------------------------------------|\n");
-                        }
-                        else
-                        {
-                            printf("|-----------------------------------------------|\n");
-                            printf("|  O livro não está disponível para empréstimo. |\n");
-                            printf("|-----------------------------------------------|\n");
-                        }
-                        break;
+                        printf("|-----------------------------------------------|\n");
+                        printf("|   O livro está disponível para empréstimo!    |\n");
+                        printf("| Digite seu email para completar o empréstimo: |\n");
+                        printf("|-----------------------------------------------|\n");
+                        scanf("%s", email);
+                        livros[i].emprestado = 1;
+                        printf("|-----------------------------------------------|\n");
+                        printf("|       O livro foi emprestado com sucesso.     |\n");
+                        printf("|-----------------------------------------------|\n");
                     }
-                }
-
-                if (encontrado == 0)
-                {
-                    printf("|-----------------------------------------------|\n");
-                    printf("|              Livro não encontrado.            |\n");
-                    printf("|-----------------------------------------------|\n");
-                    printf("|       Deseja emprestar outro livro?           |\n");
-                    printf("|       1 - Sim.                                |\n");
-                    printf("|       2 - Não. Voltar ao menu principal.      |\n");
-                    printf("|-----------------------------------------------|\n");
-                    scanf(" %d", &opcaoEmprestimo);
-                }
-                while (opcaoEmprestimo != 1 && opcaoEmprestimo != 2)
-                {
-                    printf("|-----------------------------------------------|\n");
-                    printf("|               Valor inválido.                 |\n");
-                    printf("|-----------------------------------------------|\n");
-                    printf("|       Deseja emprestar outro livro?           |\n");
-                    printf("|       1 - Sim.                                |\n");
-                    printf("|       2 - Não. Voltar ao menu principal.      |\n");
-                    printf("|-----------------------------------------------|\n");
-                    scanf(" %d", &opcaoEmprestimo);
+                    else
+                    {
+                        printf("|-----------------------------------------------|\n");
+                        printf("|  O livro não está disponível para empréstimo. |\n");
+                        printf("|-----------------------------------------------|\n");
+                    }
+                    break;
                 }
             }
+
+            if (encontrado == 0)
+            {
+                printf("|-----------------------------------------------|\n");
+                printf("|              Livro não encontrado.            |\n");
+                printf("|-----------------------------------------------|\n");
+            }
+            break;
+
+            if (encontrado == 0)
+            {
+                printf("|-----------------------------------------------|\n");
+                printf("|              Livro não encontrado.            |\n");
+                printf("|-----------------------------------------------|\n");
+                printf("|       Deseja emprestar outro livro?           |\n");
+                printf("|       1 - Sim.                                |\n");
+                printf("|       2 - Não. Voltar ao menu principal.      |\n");
+                printf("|-----------------------------------------------|\n");
+                scanf(" %d", &opcaoEmprestimo);
+            }
+            while (opcaoEmprestimo != 1 && opcaoEmprestimo != 2)
+            {
+                printf("|-----------------------------------------------|\n");
+                printf("|               Valor inválido.                 |\n");
+                printf("|-----------------------------------------------|\n");
+                printf("|       Deseja emprestar outro livro?           |\n");
+                printf("|       1 - Sim.                                |\n");
+                printf("|       2 - Não. Voltar ao menu principal.      |\n");
+                printf("|-----------------------------------------------|\n");
+                scanf(" %d", &opcaoEmprestimo);
+            }
+
             break;
 
         case 4:
