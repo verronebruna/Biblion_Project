@@ -172,7 +172,8 @@ int main()
                     if (strcmp(livros[i].ISBN, isbnConsulta) == 0)
                     {
                         printf("|-----------------------------------------------|\n");
-                        printf("| Livro encontrado: Título:%s, Autor:%s, ISBN:%s|\n", livros[i].titulo, livros[i].autor, livros[i].ISBN);
+                        printf("| Livro encontrado: Título:%s |\n", livros[i].titulo);
+                        printf("| Autor:%s e ISBN:%s |\n", livros[i].autor, livros[i].ISBN);
                         printf("|-----------------------------------------------|\n");
                         encontradoISBN = 1;
                     }
